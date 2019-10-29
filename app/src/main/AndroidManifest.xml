@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="com.oliverspryn.medium.androidunittest" />
+                <data android:scheme="com.oliverspryn.medium.androidunittests" />
             </intent-filter>
         </activity>
     </application>
