@@ -1,3 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android Unit Tests</string>
+
+    <!-- region FirstFragment -->
+    <string name="first_body">Welcome to the First Fragment!</string>
+    <!-- endregion -->
+
+    <!-- region SecondFragment -->
+    <string name="second_body">Welcome to the Second Fragment!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- endregion -->
 </resources>
