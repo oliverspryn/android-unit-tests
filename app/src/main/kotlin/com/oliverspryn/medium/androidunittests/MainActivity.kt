@@ -1,4 +1,4 @@
-package com.oliverspryn.medium.myapplication
+package com.oliverspryn.medium.androidunittests
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
