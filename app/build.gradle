@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId 'com.oliverspryn.medium.myapplication'
+        applicationId 'com.oliverspryn.medium.androidunittests'
 
         minSdkVersion 21
         targetSdkVersion 29

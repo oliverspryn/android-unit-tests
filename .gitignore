@@ -1,10 +1,13 @@
 *.iml
 
+.classpath
 .DS_Store
 .externalNativeBuild
 .gradle
 .idea
+.project
 
+/.settings
 /build
 /captures
 /local.properties
