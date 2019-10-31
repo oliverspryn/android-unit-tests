@@ -18,7 +18,18 @@ steps:
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: false
-    tasks: 'assembleDebug test coveralls'
+    tasks: 'assembleDebug test'
+- task: Gradle@2
+  displayName: Upload Coverage Report
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    tasks: 'coveralls'
     options: '-PCOVERALLS_REPO_TOKEN=$env:COVERALLS_REPO_TOKEN -PCI_NAME=$env:CI_NAME'
   env:
     CI_NAME: $(CI_NAME)

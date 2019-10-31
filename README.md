@@ -1,2 +1,5 @@
-# android-unit-tests
-Companion code for my Medium.com article: Writing a Fully Unit Testable Android App
+# Android Unit Tests
+
+[![Build Status](https://dev.azure.com/oliverspryn/android-unit-tests/_apis/build/status/oliverspryn.android-unit-tests?branchName=develop)](https://dev.azure.com/oliverspryn/android-unit-tests/_build/latest?definitionId=2&branchName=develop) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/939149ebbddd487b9beae339f0f2d836)](https://www.codacy.com/manual/oliverspryn/semver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oliverspryn/semver&amp;utm_campaign=Badge_Grade) [![Maintainability](https://api.codeclimate.com/v1/badges/2240183e96e15084333d/maintainability)](https://codeclimate.com/github/oliverspryn/android-unit-tests/maintainability) [![Coverage Status](https://coveralls.io/repos/github/oliverspryn/android-unit-tests/badge.svg)](https://coveralls.io/github/oliverspryn/android-unit-tests) [![Known Vulnerabilities](https://snyk.io/test/github/oliverspryn/android-unit-tests/badge.svg)](https://snyk.io/test/github/oliverspryn/android-unit-tests)
+
+Companion code for my Medium.com article: [Writing a Fully Unit Testable Android App](https://medium.com/@oliverspryn/writing-a-fully-unit-testable-android-app-90cd0310f18f)
