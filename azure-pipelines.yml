@@ -2,7 +2,7 @@ name: $(SourceBranchName) $(Rev:r)
 pr: none
 
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'windows-latest'
 
 steps:
 - task: Gradle@2
@@ -16,3 +16,13 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: false
     tasks: 'test'
+- task: PublishPipelineArtifact@1
+  displayName: Save APK
+  inputs:
+    artifactName: 'app-debug.apk'
+    targetPath: 'app/build/outputs/apk/debug'
+- task: PublishPipelineArtifact@1
+  displayName: Save Unit Test Reports
+  inputs:
+    artifactName: 'reports'
+    targetPath: 'app/build/reports'
