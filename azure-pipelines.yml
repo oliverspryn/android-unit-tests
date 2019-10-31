@@ -1,0 +1,48 @@
+name: $(SourceBranchName)_$(Rev:r)
+pr: none
+
+variables:
+  - group: build-secrets
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: Gradle@2
+  displayName: Build & Test Application
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    tasks: 'assembleDebug test'
+- task: Gradle@2
+  displayName: Upload Coverage Report
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    tasks: 'coveralls'
+  env:
+    CI_BRANCH: $(BUILD.SOURCEBRANCH)
+    CI_BUILD_NUMBER: $(BUILD.BUILDNUMBER)
+    CI_BUILD_URL: $(SYSTEM.TEAMFOUNDATIONCOLLECTIONURI)/$(SYSTEM.TEAMPROJECT)/_build/results?buildId=$(BUILD.BUILDID)
+    CI_NAME: $(CI_NAME)
+    COVERALLS_REPO_TOKEN: $(COVERALLS_REPO_TOKEN)
+- task: PublishPipelineArtifact@1
+  displayName: Save APK
+  inputs:
+    artifactName: 'apk'
+    targetPath: 'app/build/outputs/apk/debug'
+- task: PublishPipelineArtifact@1
+  displayName: Save Unit Test Reports
+  inputs:
+    artifactName: 'reports'
+    targetPath: 'app/build/reports'
