@@ -132,7 +132,7 @@ tasks.withType(Test) {
 }
 
 // Thank you: https://stackoverflow.com/a/29887806
-task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+task jacocoTestReport(type: JacocoReport) {
     group = 'Reporting'
     description = 'Generate Jacoco coverage reports after running tests.'
 
@@ -143,27 +143,30 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
 
     def ignoredFilter = [
             // One-offs
+            '**/ViewMvcFactory*.*',
+
+            // Android Files
             '**/R*.*',
             '**/R$*.*',
             '**/BuildConfig*.*',
-            '**/ViewMvcFactory*.*',
-
-            // Packages
-            '**/dagger/**',
 
             // Dagger
-            '**/*_Factory*.*',
-            '**/*_MembersInjector*.*'
+            '**/dagger/**',
+            '**/*_Factory.*',
+            '**/*_MembersInjector.*',
+
+            // Navigation Graph
+            '**/*Args.*',
+            '**/*Directions.*'
     ]
 
-    afterEvaluate {
-        getExecutionData().setFrom(fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec']))
-        getSourceDirectories().setFrom(files(android.sourceSets.main.java.srcDirs))
+    classDirectories.from(fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: ignoredFilter))
+    getExecutionData().from(fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec']))
+    getSourceDirectories().from(files(android.sourceSets.main.java.srcDirs))
+}
 
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ignoredFilter)
-        }))
-    }
+afterEvaluate {
+    test.finalizedBy(jacocoTestReport)
 }
 
 // endregion
