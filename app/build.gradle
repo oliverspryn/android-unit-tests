@@ -167,8 +167,8 @@ task jacocoTestReport(type: JacocoReport) {
 }
 
 coveralls {
+    jacocoReportPath 'build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
     service 'azure-pipelines'
-    jacocoReportPath "app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
 }
 
 afterEvaluate {
