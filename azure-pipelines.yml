@@ -15,7 +15,7 @@ steps:
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: false
-    tasks: 'test'
+    tasks: 'assembleDebug test'
 - task: PublishPipelineArtifact@1
   displayName: Save APK
   inputs:
