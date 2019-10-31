@@ -1,4 +1,4 @@
-name: $(SourceBranchName) $(Rev:r)
+name: $(SourceBranchName)_$(Rev:r)
 pr: none
 
 variables:
@@ -19,13 +19,14 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: false
     tasks: 'assembleDebug test coveralls'
-    options: '-PCOVERALLS_REPO_TOKEN=$env:COVERALLS_REPO_TOKEN'
+    options: '-PCOVERALLS_REPO_TOKEN=$env:COVERALLS_REPO_TOKEN -PCI_NAME=$env:CI_NAME'
   env:
+    CI_NAME: $(CI_NAME)
     COVERALLS_REPO_TOKEN: $(COVERALLS_REPO_TOKEN)
 - task: PublishPipelineArtifact@1
   displayName: Save APK
   inputs:
-    artifactName: 'app-debug.apk'
+    artifactName: 'apk'
     targetPath: 'app/build/outputs/apk/debug'
 - task: PublishPipelineArtifact@1
   displayName: Save Unit Test Reports
