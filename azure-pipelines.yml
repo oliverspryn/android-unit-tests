@@ -1,6 +1,9 @@
 name: $(SourceBranchName) $(Rev:r)
 pr: none
 
+variables:
+  - group: build-secrets
+
 pool:
   vmImage: 'windows-latest'
 
@@ -16,7 +19,6 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: false
     tasks: 'assembleDebug test coveralls'
-    options: '-PCOVERALLS_REPO_TOKEN=$(COVERALLS_REPO_TOKEN)'
 - task: PublishPipelineArtifact@1
   displayName: Save APK
   inputs:
