@@ -160,7 +160,7 @@ task jacocoTestReport(type: JacocoReport) {
             '**/*Directions.*'
     ]
 
-    classDirectories.from(fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: ignoredFilter))
+    getClassDirectories().from(fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: ignoredFilter))
     getExecutionData().from(fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec']))
     getSourceDirectories().from(files(android.sourceSets.main.java.srcDirs))
 }
