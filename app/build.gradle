@@ -58,6 +58,10 @@ android {
 
 dependencies {
 
+    // Dagger
+    implementation 'com.google.dagger:dagger:2.22.1'
+    kapt 'com.google.dagger:dagger-compiler:2.22.1'
+
     // region Application
 
     // AndroidX
@@ -93,3 +97,73 @@ dependencies {
 
     // endregion
 }
+
+// region Unit Test Configuration
+
+android.testOptions.unitTests {
+    returnDefaultValues = true
+
+    all {
+        testLogging {
+            outputs.upToDateWhen {
+                false
+            }
+        }
+    }
+}
+
+// Thank you: https://stackoverflow.com/a/36130467/
+tasks.withType(Test) {
+    testLogging {
+        events 'passed', 'skipped', 'failed', 'standardOut'
+        exceptionFormat 'full'
+        showCauses true
+        showExceptions true
+        showStackTraces true
+
+        debug {
+            events 'started', 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            exceptionFormat 'full'
+        }
+
+        info.events = debug.events
+        info.exceptionFormat = debug.exceptionFormat
+    }
+}
+
+// Thank you: https://stackoverflow.com/a/29887806
+task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+    group = 'Reporting'
+    description = 'Generate Jacoco coverage reports after running tests.'
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+    }
+
+    def ignoredFilter = [
+            // One-offs
+            '**/R*.*',
+            '**/R$*.*',
+            '**/BuildConfig*.*',
+            '**/ViewMvcFactory*.*',
+
+            // Packages
+            '**/dagger/**',
+
+            // Dagger
+            '**/*_Factory*.*',
+            '**/*_MembersInjector*.*'
+    ]
+
+    afterEvaluate {
+        getExecutionData().setFrom(fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec']))
+        getSourceDirectories().setFrom(files(android.sourceSets.main.java.srcDirs))
+
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ignoredFilter)
+        }))
+    }
+}
+
+// endregion
