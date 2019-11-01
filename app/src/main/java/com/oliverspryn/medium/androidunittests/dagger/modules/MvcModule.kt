@@ -1,4 +1,4 @@
-package com.oliverspryn.medium.androidunittests.dagger
+package com.oliverspryn.medium.androidunittests.dagger.modules
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,14 +12,7 @@ class MvcModule {
     @Provides
     fun provideLayoutInflater(
         context: Context
-    ) = LayoutInflater.from(
+    ): LayoutInflater = LayoutInflater.from(
         context
-    )
-
-    @Provides
-    fun provideViewMvcFactory(
-        layoutInflater: LayoutInflater
-    ) = ViewMvcFactory(
-        layoutInflater = layoutInflater
     )
 }
