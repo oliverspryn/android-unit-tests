@@ -1,6 +1,7 @@
 package com.oliverspryn.medium.androidunittests.dagger
 
 import com.oliverspryn.medium.androidunittests.MainActivity
+import com.oliverspryn.medium.androidunittests.dagger.components.DaggerMainComponent
 import com.oliverspryn.medium.androidunittests.dagger.components.MainComponent
 
 object DaggerInjector {
